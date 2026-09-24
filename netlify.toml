@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# TanStack Start (via Nitro's netlify preset) handles SSR/API routing itself through
+# Netlify Functions — no manual redirects are needed for the app to work.
