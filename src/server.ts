@@ -1,3 +1,12 @@
+// Must run before anything else: @supabase/supabase-js's realtime client throws at
+// construction time if `WebSocket` isn't a global, and that global is only guaranteed
+// native on Node 22+. Polyfilling it here makes Supabase clients work under any Node
+// runtime version a deploy target (e.g. Netlify Functions) happens to use.
+import { WebSocket as NodeWebSocket } from "ws";
+if (typeof globalThis.WebSocket === "undefined") {
+  (globalThis as { WebSocket?: unknown }).WebSocket = NodeWebSocket;
+}
+
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
