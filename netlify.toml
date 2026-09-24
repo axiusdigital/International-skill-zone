@@ -3,7 +3,9 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Node 22+ is required: @supabase/supabase-js's realtime client needs the
+  # native WebSocket global, which only became stable in Node 22.
+  NODE_VERSION = "22"
 
 # TanStack Start (via Nitro's netlify preset) handles SSR/API routing itself through
 # Netlify Functions — no manual redirects are needed for the app to work.
