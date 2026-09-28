@@ -62,6 +62,7 @@ export function ResultsShowcase() {
 
   return (
     <section
+      id="results"
       className="isolate scroll-mt-24 overflow-hidden py-20 md:py-28"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

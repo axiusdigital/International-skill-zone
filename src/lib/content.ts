@@ -63,11 +63,13 @@ export const NAV_LINKS = [
 
 /** Trimmed set shown in the header — only the essentials. */
 export const HEADER_NAV_LINKS = [
+  { label: "PTE Success Roadmap", href: "#roadmap" },
   { label: "Why Choose Us", href: "#why-choose" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "How We Differ", href: "#how-we-differ" },
-  { label: "Fees & Packages", href: "#fees-packages" },
-  { label: "Support", href: "#support" },
+  { label: "Results & Student Feedback", href: "#results" },
+  { label: "Demo Class", href: "#demo-class" },
+  { label: "Course Plans", href: "#fees-packages" },
+  { label: "Assessment & Support", href: "#enroll" },
+  { label: "Contact Us", href: "#support" },
 ] as const;
 
 /** Replace with your PTE demo class YouTube video ID (the part after v= in the URL). */
