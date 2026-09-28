@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";
@@ -7,6 +7,7 @@ import {
   ArrowUp,
   Eye,
   EyeOff,
+  ImagePlus,
   Loader2,
   Pencil,
   Plus,
@@ -21,11 +22,27 @@ import {
   createTestimonial,
   deleteTestimonial,
   listAllTestimonials,
+  removeTestimonialResultImage,
   reorderTestimonials,
   setTestimonialPublished,
   updateTestimonial,
+  uploadTestimonialResultImage,
 } from "@/lib/testimonials.functions";
 import { cn } from "@/lib/utils";
+
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.split(",")[1] ?? "");
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
 
 export const Route = createFileRoute("/_authenticated/admin/testimonials")({
   head: () => ({
@@ -73,9 +90,61 @@ function TestimonialsAdmin() {
   const [form, setForm] = useState<TestimonialInput>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [imageUploadingId, setImageUploadingId] = useState<string | null>(null);
+  const imageTargetIdRef = useRef<string | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const invalidate = () =>
-    queryClient.invalidateQueries({ queryKey: ["admin", "testimonials"] });
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: ["admin", "testimonials"] }),
+      queryClient.invalidateQueries({ queryKey: ["testimonials", "published"] }),
+    ]);
+
+  function openImagePicker(id: string) {
+    imageTargetIdRef.current = id;
+    imageInputRef.current?.click();
+  }
+
+  async function onImageSelected(file: File | undefined) {
+    const id = imageTargetIdRef.current;
+    if (!file || !id) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error(`${file.name} isn't an image`);
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      toast.error(`${file.name} is larger than 5MB`);
+      return;
+    }
+    setImageUploadingId(id);
+    try {
+      const fileBase64 = await fileToBase64(file);
+      await uploadTestimonialResultImage({
+        data: { id, fileBase64, fileName: file.name, contentType: file.type },
+      });
+      toast.success("Result image added");
+      await invalidate();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setImageUploadingId(null);
+      if (imageInputRef.current) imageInputRef.current.value = "";
+    }
+  }
+
+  async function onRemoveImage(t: Testimonial) {
+    if (!window.confirm("Remove the result image from this testimonial?")) return;
+    setImageUploadingId(t.id);
+    try {
+      await removeTestimonialResultImage({ data: { id: t.id } });
+      toast.success("Result image removed");
+      await invalidate();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Remove failed");
+    } finally {
+      setImageUploadingId(null);
+    }
+  }
 
   const openAdd = () => {
     setEditing(null);
@@ -192,6 +261,13 @@ function TestimonialsAdmin() {
           <Plus className="h-4 w-4" />
           Add Testimonial
         </button>
+        <input
+          ref={imageInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => onImageSelected(e.target.files?.[0])}
+        />
       </div>
 
       <div className="mt-6 space-y-3">
@@ -236,6 +312,20 @@ function TestimonialsAdmin() {
                 </button>
               </div>
 
+              {t.result_image_url ? (
+                <div className="relative shrink-0">
+                  <img
+                    src={t.result_image_url}
+                    alt="Result attached to testimonial"
+                    className="border-border h-14 w-24 rounded-lg border object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="bg-muted border-border flex h-14 w-24 shrink-0 items-center justify-center rounded-lg border border-dashed">
+                  <span className="text-muted-foreground text-[10px] font-medium">No image</span>
+                </div>
+              )}
+
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-display text-sm font-bold">{t.student_name}</p>
@@ -247,6 +337,31 @@ function TestimonialsAdmin() {
                 <p className="text-muted-foreground mt-1.5 line-clamp-2 text-sm">
                   {t.quote}
                 </p>
+                <div className="mt-2 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => openImagePicker(t.id)}
+                    disabled={imageUploadingId === t.id}
+                    className="text-accent hover:text-accent/80 inline-flex items-center gap-1 text-xs font-semibold disabled:opacity-60"
+                  >
+                    {imageUploadingId === t.id ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <ImagePlus className="h-3.5 w-3.5" />
+                    )}
+                    {t.result_image_url ? "Replace result image" : "Add result image"}
+                  </button>
+                  {t.result_image_url ? (
+                    <button
+                      type="button"
+                      onClick={() => onRemoveImage(t)}
+                      disabled={imageUploadingId === t.id}
+                      className="text-muted-foreground hover:text-destructive text-xs font-semibold disabled:opacity-60"
+                    >
+                      Remove
+                    </button>
+                  ) : null}
+                </div>
               </div>
 
               <div className="flex items-center gap-1.5">

@@ -8,7 +8,7 @@ export function CoursePlans() {
   return (
     <section
       id="fees-packages"
-      className="scroll-mt-24 bg-gradient-to-b from-secondary/60 to-background py-20 md:py-28"
+      className="scroll-mt-24 bg-gradient-to-b from-secondary/60 to-background py-14 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="mb-10 text-center md:mb-14">

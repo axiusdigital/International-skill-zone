@@ -6,7 +6,7 @@ export function PracticeQuote() {
   const texts = useSiteTexts();
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden py-12 md:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="from-primary via-primary to-[oklch(0.2_0.05_259)] shadow-lift relative overflow-hidden rounded-3xl bg-gradient-to-br px-6 py-14 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export function Comparison() {
   return (
-    <section id="how-we-differ" className="scroll-mt-24 py-20 md:py-28">
+    <section id="how-we-differ" className="scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="mb-10 text-center md:mb-14">
           <p className="font-display text-muted-foreground text-xs font-bold tracking-[0.2em] uppercase">

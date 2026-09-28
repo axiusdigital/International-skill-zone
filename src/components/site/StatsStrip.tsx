@@ -29,7 +29,7 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
 
 export function StatsStrip() {
   return (
-    <section id="our-journey" className="scroll-mt-24 py-20 md:py-28">
+    <section id="our-journey" className="scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Our Journey"

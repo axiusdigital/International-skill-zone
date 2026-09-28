@@ -10,7 +10,7 @@ export function LiveFeedback() {
   const texts = useSiteTexts();
 
   return (
-    <section id="live-feedback" className="scroll-mt-24 py-20 md:py-28">
+    <section id="live-feedback" className="scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="text-center">
           <span className="font-display border-accent/30 bg-accent/10 text-accent inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-widest uppercase">
@@ -42,10 +42,10 @@ export function LiveFeedback() {
             href={watchUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-primary hover:text-accent inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+            className="shadow-lift hover:shadow-glow inline-flex items-center gap-2 rounded-full bg-[#FF0000] px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#CC0000] sm:text-base"
           >
-            <Youtube className="h-4 w-4 text-red-600" />
-            Watch more student reviews on YouTube
+            <Youtube className="h-5 w-5 fill-current" />
+            Watch More Student Reviews on YouTube
           </a>
         </FadeIn>
       </div>

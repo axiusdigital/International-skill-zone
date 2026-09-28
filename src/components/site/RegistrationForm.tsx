@@ -165,7 +165,7 @@ export function RegistrationForm() {
   }
 
   return (
-    <section id="enroll" className="bg-secondary/40 scroll-mt-24 py-20 md:py-28">
+    <section id="enroll" className="bg-secondary/40 scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="shadow-lift overflow-hidden rounded-2xl border border-primary/10 bg-white">

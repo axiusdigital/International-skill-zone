@@ -4,6 +4,7 @@ import { Star, Trophy } from "lucide-react";
 import { ACHIEVEMENT_HIGHLIGHTS, ACHIEVEMENT_STATS } from "@/lib/content";
 import { FadeIn, StaggerGroup, StaggerItem } from "./motion-primitives";
 import { cn } from "@/lib/utils";
+import successStoryImage from "@/assets/success-story.jpeg";
 
 function CountUp({
   value,
@@ -38,7 +39,7 @@ function CountUp({
 
 export function Achievements() {
   return (
-    <section id="achievements" className="bg-secondary/40 relative scroll-mt-24 overflow-hidden py-20 md:py-28">
+    <section id="achievements" className="bg-secondary/40 relative scroll-mt-24 overflow-hidden py-14 md:py-28">
       {/* Subtle wave background */}
       <div
         aria-hidden
@@ -77,30 +78,43 @@ export function Achievements() {
           </div>
         </FadeIn>
 
-        {/* Stat cards */}
-        <StaggerGroup className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 xl:grid-cols-6">
-          {ACHIEVEMENT_STATS.map((stat) => (
-            <StaggerItem key={stat.label}>
-              <article className="glass shadow-card group relative flex h-full flex-col overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-lift">
-                <div className="flex flex-1 flex-col items-center px-4 pt-6 pb-5 text-center">
-                  <span
-                    className={cn(
-                      "mb-4 flex h-14 w-14 items-center justify-center rounded-full",
-                      stat.iconBg,
-                    )}
-                  >
-                    <stat.icon className="h-7 w-7" strokeWidth={1.75} />
-                  </span>
-                  <CountUp value={stat.value} suffix={stat.suffix} className={stat.color} />
-                  <p className="text-foreground/80 mt-3 text-xs leading-snug font-medium sm:text-sm">
-                    {stat.label}
-                  </p>
-                </div>
-                <div className={cn("h-1.5 w-full", stat.bar)} />
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
+        {/* Image + stat cards */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start lg:gap-10 xl:gap-14">
+          <FadeIn className="lg:sticky lg:top-28">
+            <div className="border-primary/10 shadow-lift relative overflow-hidden rounded-3xl border-2 bg-white">
+              <img
+                src={successStoryImage}
+                alt="Student celebrating a top PTE score with International Skill Zone"
+                className="aspect-[4/5] w-full object-cover sm:aspect-[16/10] lg:aspect-[4/5]"
+                loading="lazy"
+              />
+            </div>
+          </FadeIn>
+
+          <StaggerGroup className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
+            {ACHIEVEMENT_STATS.map((stat) => (
+              <StaggerItem key={stat.label}>
+                <article className="glass shadow-card group relative flex h-full flex-col overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-lift">
+                  <div className="flex flex-1 flex-col items-center px-4 pt-6 pb-5 text-center">
+                    <span
+                      className={cn(
+                        "mb-4 flex h-14 w-14 items-center justify-center rounded-full",
+                        stat.iconBg,
+                      )}
+                    >
+                      <stat.icon className="h-7 w-7" strokeWidth={1.75} />
+                    </span>
+                    <CountUp value={stat.value} suffix={stat.suffix} className={stat.color} />
+                    <p className="text-foreground/80 mt-3 text-xs leading-snug font-medium sm:text-sm">
+                      {stat.label}
+                    </p>
+                  </div>
+                  <div className={cn("h-1.5 w-full", stat.bar)} />
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
 
         {/* Feature bar */}
         <FadeIn delay={0.15} className="mt-10 md:mt-14">

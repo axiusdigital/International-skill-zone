@@ -7,7 +7,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="from-primary via-primary to-background relative scroll-mt-24 overflow-hidden bg-gradient-to-br py-20 md:py-28"
+      className="from-primary via-primary to-background relative scroll-mt-24 overflow-hidden bg-gradient-to-br py-14 md:py-28"
     >
       {/* Decorative shapes */}
       <div

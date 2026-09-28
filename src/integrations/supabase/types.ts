@@ -110,6 +110,8 @@ export type Database = {
           is_published: boolean
           quote: string
           rating: number
+          result_image_url: string | null
+          result_storage_path: string | null
           student_name: string
         }
         Insert: {
@@ -120,6 +122,8 @@ export type Database = {
           is_published?: boolean
           quote: string
           rating?: number
+          result_image_url?: string | null
+          result_storage_path?: string | null
           student_name: string
         }
         Update: {
@@ -130,6 +134,8 @@ export type Database = {
           is_published?: boolean
           quote?: string
           rating?: number
+          result_image_url?: string | null
+          result_storage_path?: string | null
           student_name?: string
         }
         Relationships: []

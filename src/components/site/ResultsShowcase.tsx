@@ -21,7 +21,8 @@ function useCardWidth() {
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth;
-      if (vw < 640) setWidth(160);
+      if (vw < 400) setWidth(190);
+      else if (vw < 640) setWidth(220);
       else if (vw < 1024) setWidth(230);
       else setWidth(300);
     };
@@ -63,7 +64,7 @@ export function ResultsShowcase() {
   return (
     <section
       id="results"
-      className="isolate scroll-mt-24 overflow-hidden py-20 md:py-28"
+      className="isolate scroll-mt-24 overflow-hidden py-14 md:py-28"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

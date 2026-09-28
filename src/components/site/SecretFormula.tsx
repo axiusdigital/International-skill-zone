@@ -15,7 +15,7 @@ const watchUrl = getYoutubeWatchUrl(YOUTUBE_GUIDE_VIDEO_ID, YOUTUBE_DEMO_WATCH_U
 
 export function SecretFormula() {
   return (
-    <section id="secret-formula" className="bg-secondary/40 scroll-mt-24 overflow-hidden py-20 md:py-28">
+    <section id="secret-formula" className="bg-secondary/40 scroll-mt-24 overflow-hidden py-14 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top banner */}
         <FadeIn className="mb-0 flex justify-center">

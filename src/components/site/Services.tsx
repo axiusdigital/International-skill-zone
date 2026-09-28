@@ -5,7 +5,7 @@ import { StaggerGroup, StaggerItem } from "./motion-primitives";
 
 export function Services() {
   return (
-    <section id="services" className="bg-secondary/40 scroll-mt-24 py-20 md:py-28">
+    <section id="services" className="bg-secondary/40 scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="What We Offer"

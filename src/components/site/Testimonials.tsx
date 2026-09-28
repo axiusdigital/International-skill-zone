@@ -67,7 +67,7 @@ export function Testimonials() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="testimonials" className="scroll-mt-24 overflow-hidden py-20 md:py-28">
+    <section id="testimonials" className="scroll-mt-24 overflow-hidden py-14 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
@@ -134,6 +134,14 @@ export function Testimonials() {
                     <blockquote className="text-foreground/85 mt-4 flex-1 text-sm leading-relaxed">
                       “{t.quote}”
                     </blockquote>
+                    {t.result_image_url ? (
+                      <img
+                        src={t.result_image_url}
+                        alt={`${t.student_name}'s score report`}
+                        loading="lazy"
+                        className="border-border mt-5 aspect-[2/1] w-full rounded-lg border object-cover"
+                      />
+                    ) : null}
                     <p className="border-border mt-6 border-t pt-3 text-xs font-semibold tracking-wide text-accent uppercase">
                       ✓ Verified Result
                     </p>

@@ -7,6 +7,8 @@ export type Testimonial = {
   is_published: boolean;
   display_order: number;
   created_at: string;
+  result_image_url: string | null;
+  result_storage_path: string | null;
 };
 
 export type TestimonialInput = {

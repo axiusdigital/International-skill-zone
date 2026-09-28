@@ -16,7 +16,7 @@ export function DemoClass() {
   const texts = useSiteTexts();
 
   return (
-    <section id="demo-class" className="scroll-mt-24 py-20 md:py-28">
+    <section id="demo-class" className="scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top: copy + video */}
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">

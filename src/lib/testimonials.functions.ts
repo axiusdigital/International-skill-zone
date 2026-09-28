@@ -2,8 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { assertAdmin } from "@/integrations/supabase/require-admin.server";
 import { createPublicSupabase } from "./public-supabase.server";
 import type { Testimonial } from "./types";
+
+// Result images for testimonials reuse the public "results" storage bucket.
+const RESULT_IMAGE_BUCKET = "results";
+// ~5MB of binary data, base64-encoded (base64 is ~33% larger than raw bytes).
+const MAX_BASE64_LENGTH = 7_000_000;
 
 // ---------- Public ----------
 
@@ -12,7 +18,9 @@ export const getPublishedTestimonials = createServerFn({ method: "GET" }).handle
     const supabase = createPublicSupabase();
     const { data, error } = await supabase
       .from("testimonials")
-      .select("id, student_name, course, quote, rating, is_published, display_order, created_at")
+      .select(
+        "id, student_name, course, quote, rating, is_published, display_order, created_at, result_image_url, result_storage_path",
+      )
       .eq("is_published", true)
       .order("display_order", { ascending: true });
     if (error) throw new Error(error.message);
@@ -97,8 +105,18 @@ export const deleteTestimonial = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({ id: z.string().uuid() }).parse(data))
   .handler(async ({ context, data }) => {
     const supabase = context.supabase as unknown as SupabaseClient;
+    const { data: row } = await supabase
+      .from("testimonials")
+      .select("result_storage_path")
+      .eq("id", data.id)
+      .maybeSingle();
     const { error } = await supabase.from("testimonials").delete().eq("id", data.id);
     if (error) throw new Error(error.message);
+    const oldPath = (row as { result_storage_path: string | null } | null)?.result_storage_path;
+    if (oldPath) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.storage.from(RESULT_IMAGE_BUCKET).remove([oldPath]);
+    }
     return { ok: true };
   });
 
@@ -132,4 +150,85 @@ export const reorderTestimonials = createServerFn({ method: "POST" })
       if (error) throw new Error(error.message);
     }
     return { ok: true };
+  });
+
+export const uploadTestimonialResultImage = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        fileBase64: z.string().min(1).max(MAX_BASE64_LENGTH),
+        fileName: z.string().min(1).max(200),
+        contentType: z.string().min(1).max(100),
+      })
+      .parse(data),
+  )
+  .handler(async ({ context, data }): Promise<Testimonial> => {
+    await assertAdmin(context.supabase as unknown as SupabaseClient, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: existing } = await supabaseAdmin
+      .from("testimonials")
+      .select("result_storage_path")
+      .eq("id", data.id)
+      .maybeSingle();
+
+    const bytes = Uint8Array.from(Buffer.from(data.fileBase64, "base64"));
+    const extMatch = /\.([a-zA-Z0-9]+)$/.exec(data.fileName);
+    const ext = (extMatch?.[1] ?? "jpg").toLowerCase();
+    const path = `testimonial-${data.id}-${crypto.randomUUID()}.${ext}`;
+
+    const { error: uploadError } = await supabaseAdmin.storage
+      .from(RESULT_IMAGE_BUCKET)
+      .upload(path, bytes, { contentType: data.contentType, upsert: false });
+    if (uploadError) throw new Error(uploadError.message);
+
+    const { data: publicUrlData } = supabaseAdmin.storage
+      .from(RESULT_IMAGE_BUCKET)
+      .getPublicUrl(path);
+
+    const { data: updated, error } = await supabaseAdmin
+      .from("testimonials")
+      .update({ result_image_url: publicUrlData.publicUrl, result_storage_path: path })
+      .eq("id", data.id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    const oldPath = (existing as { result_storage_path: string | null } | null)?.result_storage_path;
+    if (oldPath) {
+      await supabaseAdmin.storage.from(RESULT_IMAGE_BUCKET).remove([oldPath]);
+    }
+
+    return updated as Testimonial;
+  });
+
+export const removeTestimonialResultImage = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data) => z.object({ id: z.string().uuid() }).parse(data))
+  .handler(async ({ context, data }): Promise<Testimonial> => {
+    await assertAdmin(context.supabase as unknown as SupabaseClient, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: existing } = await supabaseAdmin
+      .from("testimonials")
+      .select("result_storage_path")
+      .eq("id", data.id)
+      .maybeSingle();
+
+    const { data: updated, error } = await supabaseAdmin
+      .from("testimonials")
+      .update({ result_image_url: null, result_storage_path: null })
+      .eq("id", data.id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    const oldPath = (existing as { result_storage_path: string | null } | null)?.result_storage_path;
+    if (oldPath) {
+      await supabaseAdmin.storage.from(RESULT_IMAGE_BUCKET).remove([oldPath]);
+    }
+
+    return updated as Testimonial;
   });
