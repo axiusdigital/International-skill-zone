@@ -61,7 +61,7 @@ export function PracticeQuote() {
 
             <figcaption className="relative mt-7 flex flex-col items-center gap-1 sm:mt-8">
               <span className="from-accent to-accent/70 shadow-gold font-display text-primary flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-lg font-black sm:h-16 sm:w-16 sm:text-xl">
-                PU
+                SU
               </span>
               <p className="font-display text-primary-foreground mt-3 text-lg font-bold sm:text-xl">
                 {texts.quote_author}

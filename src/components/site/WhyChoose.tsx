@@ -38,27 +38,33 @@ export function WhyChoose() {
             </FadeIn>
           </div>
 
-          <StaggerGroup className="grid gap-5 sm:grid-cols-2">
-            {WHY_CHOOSE.map((item) => (
-              <StaggerItem key={item.title}>
-                <motion.article
-                  whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="border-primary/15 hover:border-accent/40 flex h-full flex-col items-center rounded-2xl border-2 bg-white px-5 py-8 text-center shadow-card transition-all duration-300 hover:shadow-lift sm:px-6"
-                >
-                  <span className="bg-primary text-primary-foreground mb-5 flex h-14 w-14 items-center justify-center rounded-full shadow-md">
-                    <item.icon className="h-6 w-6" strokeWidth={1.75} />
-                  </span>
-                  <h3 className="font-display text-primary text-base font-bold sm:text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.article>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          <div className="border-primary/10 shadow-lift overflow-hidden rounded-2xl border-2 bg-white">
+            <StaggerGroup className="divide-primary/10 divide-y">
+              {WHY_CHOOSE.map((item) => (
+                <StaggerItem key={item.title}>
+                  <motion.div
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                    className="flex items-center gap-4 px-5 py-5 sm:px-7"
+                  >
+                    <span
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-md ${item.color}`}
+                    >
+                      <item.icon className="h-5 w-5" strokeWidth={1.75} />
+                    </span>
+                    <div>
+                      <h3 className="font-display text-primary text-base font-bold sm:text-lg">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground mt-0.5 text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          </div>
         </div>
 
         <FadeIn delay={0.1} className="mt-12 flex flex-col items-center gap-5 sm:mt-14 md:flex-row md:justify-between">

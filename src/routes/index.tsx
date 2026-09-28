@@ -15,6 +15,7 @@ import { CoursePlans } from "@/components/site/CoursePlans";
 import { RegistrationForm } from "@/components/site/RegistrationForm";
 import { Footer } from "@/components/site/Footer";
 import { getPublishedTestimonials } from "@/lib/testimonials.functions";
+import heroBackground from "@/assets/hero-background.jpeg";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) =>
@@ -23,14 +24,15 @@ export const Route = createFileRoute("/")({
       queryFn: () => getPublishedTestimonials(),
     }),
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: heroBackground, fetchPriority: "high" }],
     meta: [
-      { title: "International Skill Zone — PTE & IELTS Coaching with Prof. Umar" },
+      { title: "International Skill Zone — PTE & IELTS Coaching with Sir Umar" },
       {
         name: "description",
         content:
-          "Master PTE & IELTS with Prof. Umar's expert guidance. Flexible online classes, proven 90/90 strategies, spoken English and interview preparation at International Skill Zone, Lahore.",
+          "Master PTE & IELTS with Sir Umar's expert guidance. Flexible online classes, proven 90/90 strategies, spoken English and interview preparation at International Skill Zone, Lahore.",
       },
-      { property: "og:title", content: "International Skill Zone — PTE & IELTS Coaching with Prof. Umar" },
+      { property: "og:title", content: "International Skill Zone — PTE & IELTS Coaching with Sir Umar" },
       {
         property: "og:description",
         content:

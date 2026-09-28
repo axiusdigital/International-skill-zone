@@ -63,13 +63,12 @@ export const NAV_LINKS = [
 
 /** Trimmed set shown in the header — only the essentials. */
 export const HEADER_NAV_LINKS = [
-  { label: "PTE Success Roadmap", href: "#roadmap" },
+  { label: "PTE Roadmap", href: "#roadmap" },
   { label: "Why Choose Us", href: "#why-choose" },
-  { label: "Results & Student Feedback", href: "#results" },
+  { label: "Results", href: "#results" },
   { label: "Demo Class", href: "#demo-class" },
   { label: "Course Plans", href: "#fees-packages" },
   { label: "Assessment & Support", href: "#enroll" },
-  { label: "Contact Us", href: "#support" },
 ] as const;
 
 /** Replace with your PTE demo class YouTube video ID (the part after v= in the URL). */
@@ -518,6 +517,7 @@ export type WhyChooseItem = {
   icon: LucideIcon;
   title: string;
   description: string;
+  color: string;
 };
 
 export const WHY_CHOOSE: WhyChooseItem[] = [
@@ -526,51 +526,60 @@ export const WHY_CHOOSE: WhyChooseItem[] = [
     title: "Global Presence",
     description:
       "Our classes are conducted across Europe, USA, Australia & New Zealand.",
+    color: "bg-blue-600",
   },
   {
     icon: Lightbulb,
     title: "Unique Tips & Tricks",
     description:
       "Smart strategies, shortcuts and insider tips to help you score higher, faster.",
+    color: "bg-amber-500",
   },
   {
     icon: LibraryBig,
     title: "Comprehensive Study Material",
     description:
       "Updated templates, practice files, real exam questions and latest updates.",
+    color: "bg-emerald-500",
   },
   {
     icon: Trophy,
     title: "Proven Track Record",
     description:
       "Hundreds of students have achieved 79+ / 8-band targets and secured visas.",
+    color: "bg-purple-500",
   },
   {
     icon: CircleDollarSign,
     title: "Save Time & Money",
     description: "Get better results in less time — without extra costs.",
+    color: "bg-teal-500",
   },
   {
     icon: Headphones,
     title: "24/7 Support",
     description: "Guidance whenever you need it — even on exam day.",
+    color: "bg-orange-500",
   },
   {
     icon: ShieldCheck,
     title: "Certified Trainers",
     description:
       "Trained and certified by Pearson for the highest teaching standards.",
+    color: "bg-indigo-500",
   },
   {
     icon: UserCheck,
     title: "Personalized Attention",
     description: "Small batches and one-on-one feedback on every mock attempt.",
+    color: "bg-pink-500",
   },
   {
     icon: Target,
     title: "Higher Success Rate",
     description:
       "Proven methods, expert support and continuous practice to help you reach your goals.",
+    color: "bg-rose-500",
   },
 ];
 
@@ -674,7 +683,7 @@ export const PRACTICE_QUOTE = {
   line1: "Practice does not make perfect.",
   highlight: "Only perfect",
   line3: "practice makes perfect.",
-  author: "Prof. Umar",
+  author: "Sir Umar",
   role: "CEO of International Skill Zone",
   specialty: "Specialized in English",
 } as const;

@@ -120,25 +120,6 @@ export function Achievements() {
             ))}
           </div>
         </FadeIn>
-
-        {/* PTE badge */}
-        <FadeIn delay={0.25} className="mt-10 flex justify-end md:mt-12">
-          <div className="border-accent bg-primary relative flex h-28 w-28 flex-col items-center justify-center rounded-full border-4 text-center shadow-lg sm:h-32 sm:w-32">
-            <div
-              aria-hidden
-              className="border-accent/40 absolute inset-1 rounded-full border border-dashed"
-            />
-            <p className="text-accent font-display text-[10px] font-bold tracking-wider uppercase sm:text-xs">
-              PTE
-            </p>
-            <p className="text-primary-foreground font-display text-xl font-black sm:text-2xl">
-              90/90
-            </p>
-            <p className="text-primary-foreground/80 text-[9px] font-semibold tracking-wide uppercase sm:text-[10px]">
-              Expert
-            </p>
-          </div>
-        </FadeIn>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { ROADMAP_HIGHLIGHTS, ROADMAP_ITEMS } from "@/lib/content";
 import { useSiteTexts } from "@/hooks/use-site-texts";
 import { FadeIn, StaggerGroup, StaggerItem } from "./motion-primitives";
 import { cn } from "@/lib/utils";
+import priorityBg from "@/assets/hero-4.jpg";
 
 export function Roadmap() {
   const texts = useSiteTexts();
@@ -74,14 +75,18 @@ export function Roadmap() {
 
         {/* Priority + CTA banner */}
         <FadeIn delay={0.1} className="mt-12 md:mt-16">
-          <div className="bg-primary shadow-lift flex flex-col items-center gap-5 rounded-2xl px-6 py-7 text-center sm:px-10 md:flex-row md:justify-between md:text-left">
-            <p
-              className="text-accent text-xl leading-none sm:text-2xl"
-              style={{ fontFamily: '"Dancing Script", cursive' }}
-            >
+          <div
+            className="shadow-lift relative flex flex-col items-center gap-5 overflow-hidden rounded-2xl bg-cover bg-center px-6 py-7 text-center sm:px-10 md:flex-row md:justify-between md:text-left"
+            style={{ backgroundImage: `url(${priorityBg})` }}
+          >
+            <div
+              aria-hidden
+              className="from-primary/95 via-primary/90 to-primary/70 absolute inset-0 bg-gradient-to-r"
+            />
+            <p className="relative z-10 text-accent text-xl leading-none sm:text-2xl" style={{ fontFamily: '"Dancing Script", cursive' }}>
               {texts.roadmap_priority_line}
             </p>
-            <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+            <div className="relative z-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
               <span className="bg-primary/40 text-primary-foreground flex h-11 w-11 shrink-0 items-center justify-center rounded-full">
                 <Target className="h-5 w-5" strokeWidth={1.75} />
               </span>

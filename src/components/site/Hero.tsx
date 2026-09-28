@@ -28,6 +28,8 @@ function HeroBackgroundSlider() {
           key={index}
           src={HERO_BACKGROUNDS[index]}
           alt=""
+          fetchPriority={index === 0 ? "high" : "auto"}
+          loading={index === 0 ? "eager" : "lazy"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

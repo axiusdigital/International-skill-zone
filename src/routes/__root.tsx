@@ -75,14 +75,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "International Skill Zone — PTE & IELTS Coaching with Prof. Umar" },
+      { title: "International Skill Zone — PTE & IELTS Coaching with Sir Umar" },
       {
         name: "description",
         content:
-          "International Skill Zone — expert PTE, IELTS, spoken English, and interview coaching with Prof. Umar. Flexible online classes from Lahore, Pakistan.",
+          "International Skill Zone — expert PTE, IELTS, spoken English, and interview coaching with Sir Umar. Flexible online classes from Lahore, Pakistan.",
       },
       { name: "author", content: "International Skill Zone" },
-      { property: "og:title", content: "International Skill Zone — PTE & IELTS Coaching with Prof. Umar" },
+      { property: "og:title", content: "International Skill Zone — PTE & IELTS Coaching with Sir Umar" },
       {
         property: "og:description",
         content:

@@ -17,10 +17,8 @@ export function SecretFormula() {
   return (
     <section id="secret-formula" className="bg-secondary/40 scroll-mt-24 overflow-hidden py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Top banner — no logo, badge on the right */}
-        <FadeIn className="mb-0 flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="hidden flex-1 sm:block" aria-hidden />
-
+        {/* Top banner */}
+        <FadeIn className="mb-0 flex justify-center">
           <div className="bg-primary shadow-lift relative rounded-lg px-8 py-4 text-center sm:px-12 sm:py-5">
             <p className="font-display text-sm font-bold tracking-[0.25em] uppercase sm:text-base">
               <span className="text-accent">Power</span>{" "}
@@ -34,27 +32,11 @@ export function SecretFormula() {
               <Star className="fill-accent text-accent h-4 w-4" />
             </div>
           </div>
-
-          <div className="border-accent bg-primary relative flex h-24 w-24 shrink-0 flex-col items-center justify-center rounded-full border-4 text-center shadow-lg sm:h-28 sm:w-28">
-            <div
-              aria-hidden
-              className="border-accent/40 absolute inset-1 rounded-full border border-dashed"
-            />
-            <p className="text-accent font-display text-[9px] font-bold tracking-wider uppercase sm:text-[10px]">
-              PTE
-            </p>
-            <p className="text-primary-foreground font-display text-lg font-black sm:text-xl">
-              90/90
-            </p>
-            <p className="text-primary-foreground/80 text-[8px] font-semibold uppercase sm:text-[9px]">
-              Expert
-            </p>
-          </div>
         </FadeIn>
 
         {/* Main content */}
-        <div className="-mt-4 grid items-start gap-10 lg:grid-cols-2 lg:-mt-10 lg:gap-14">
-          <FadeIn className="-mt-10 lg:-mt-16">
+        <div className="mt-10 grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <FadeIn>
             <h2 className="font-display text-primary text-2xl leading-tight font-black uppercase sm:text-3xl lg:text-4xl">
               Discover How You Can{" "}
               <span className="text-accent">Achieve Your Desired PTE Score</span>
@@ -108,7 +90,7 @@ export function SecretFormula() {
           </FadeIn>
 
           {/* Inside you'll learn */}
-          <FadeIn delay={0.1} className="mt-8 sm:mt-10 lg:mt-16">
+          <FadeIn delay={0.1}>
             <div className="relative">
               <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
                 <span className="bg-primary text-primary-foreground font-display inline-block rounded-t-lg px-5 py-2 text-xs font-bold tracking-wide uppercase sm:text-sm">
