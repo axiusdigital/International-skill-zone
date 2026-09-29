@@ -109,12 +109,12 @@ export function ResultsShowcase() {
                 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
                 style={{ zIndex: 100 - abs, pointerEvents: hidden ? "none" : "auto", width: cardW }}
-                className="glass shadow-lift border-border absolute top-0 left-1/2 cursor-pointer overflow-hidden rounded-md border bg-white"
+                className="shadow-lift border-border absolute top-0 left-1/2 cursor-pointer overflow-hidden rounded-md border bg-white"
               >
                 <img
                   src={result.image}
                   alt={result.alt}
-                  className="aspect-[2/1] w-full object-contain"
+                  className="block h-auto w-full"
                   loading={abs <= 1 ? "eager" : "lazy"}
                 />
               </motion.button>

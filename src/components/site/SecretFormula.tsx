@@ -93,7 +93,7 @@ export function SecretFormula() {
           <FadeIn delay={0.1}>
             <div className="relative">
               <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-                <span className="bg-primary text-primary-foreground font-display inline-block rounded-t-lg px-5 py-2 text-xs font-bold tracking-wide uppercase sm:text-sm">
+                <span className="bg-primary text-primary-foreground font-display inline-block rounded-lg px-5 py-2 text-xs font-bold tracking-wide uppercase sm:text-sm">
                   Inside You&apos;ll Learn:
                 </span>
               </div>

@@ -78,7 +78,7 @@ export function DemoClass() {
         {/* Feature panel */}
         <FadeIn delay={0.15} className="relative mt-16 md:mt-20">
           <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-            <span className="bg-primary text-primary-foreground font-display inline-block rounded-t-xl px-6 py-2.5 text-xs font-bold tracking-wide uppercase sm:text-sm">
+            <span className="bg-primary text-primary-foreground font-display inline-block rounded-xl px-6 py-2.5 text-xs font-bold tracking-wide uppercase sm:text-sm">
               Join Our Free Demo Class &amp; Check
             </span>
           </div>

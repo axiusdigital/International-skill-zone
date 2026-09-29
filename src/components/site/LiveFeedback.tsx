@@ -44,7 +44,7 @@ export function LiveFeedback() {
             rel="noreferrer"
             className="shadow-lift hover:shadow-glow inline-flex items-center gap-2 rounded-full bg-[#FF0000] px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#CC0000] sm:text-base"
           >
-            <Youtube className="h-5 w-5 fill-current" />
+            
             Watch More Student Reviews on YouTube
           </a>
         </FadeIn>
