@@ -79,15 +79,15 @@ function HomePage() {
       <main>
         <Hero />
         <ResultsShowcase />
+        <Testimonials />
         <Achievements />
         <WhyChoose />
+        <Comparison />
+        <LiveFeedback />
         <DemoClass />
         <SecretFormula />
         <Roadmap />
-        <Testimonials />
-        <LiveFeedback />
         <PracticeQuote />
-        <Comparison />
         <CoursePlans />
         <RegistrationForm />
       </main>

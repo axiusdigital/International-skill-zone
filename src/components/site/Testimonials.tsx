@@ -135,12 +135,14 @@ export function Testimonials() {
                       “{t.quote}”
                     </blockquote>
                     {t.result_image_url ? (
-                      <img
-                        src={t.result_image_url}
-                        alt={`${t.student_name}'s score report`}
-                        loading="lazy"
-                        className="border-border mt-5 aspect-[2/1] w-full rounded-lg border object-cover"
-                      />
+                      <div className="bg-muted border-border mt-5 w-full overflow-hidden rounded-lg border">
+                        <img
+                          src={t.result_image_url}
+                          alt={`${t.student_name}'s score report`}
+                          loading="lazy"
+                          className="max-h-72 w-full object-contain"
+                        />
+                      </div>
                     ) : null}
                     <p className="border-border mt-6 border-t pt-3 text-xs font-semibold tracking-wide text-accent uppercase">
                       ✓ Verified Result

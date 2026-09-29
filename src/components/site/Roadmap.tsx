@@ -11,7 +11,7 @@ export function Roadmap() {
   const texts = useSiteTexts();
 
   return (
-    <section id="roadmap" className="bg-secondary/40 scroll-mt-24 overflow-hidden py-14 md:py-28">
+    <section id="roadmap" className="bg-secondary/40 scroll-mt-24 py-14 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Title banner */}
         <FadeIn className="text-center">
